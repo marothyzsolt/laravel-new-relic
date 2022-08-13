@@ -1,0 +1,55 @@
+{
+    "name": "marothyzsolt/laravel-new-relic",
+    "description": "Laravel Log Handler for New Relic",
+    "keywords": [
+        "marothyzsolt",
+        "laravel-new-relic"
+    ],
+    "homepage": "https://github.com/marothyzsolt/laravel-new-relic",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Zsolt Marothy",
+            "email": "zsolt@marothy.me",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0|^8.1",
+        "illuminate/support": "^8.0",
+        "newrelic/monolog-enricher": "^2.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MarothyZsolt\\LaravelNewRelic\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MarothyZsolt\\LaravelNewRelic\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MarothyZsolt\\LaravelNewRelic\\LaravelNewRelicServiceProvider"
+            ],
+            "aliases": {
+                "LaravelNewRelic": "MarothyZsolt\\LaravelNewRelic\\LaravelNewRelicFacade"
+            }
+        }
+    }
+}
