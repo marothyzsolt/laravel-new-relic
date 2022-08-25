@@ -12,8 +12,9 @@ use Throwable;
 
 class NewRelicLogger
 {
-    protected ?Request $request;
+    private ?Request $request;
     private ?Throwable $throwable = null;
+    private string $channel = 'single';
 
     public function __construct(Request $request = null)
     {
@@ -29,6 +30,8 @@ class NewRelicLogger
 
         $log->pushHandler(new BufferHandler($handler));
 
+        $this->channel = $config['channel'] ?? debug_backtrace()[2]['args'][0];
+
         foreach ($log->getHandlers() as $handler) {
             $handler->pushProcessor([$this, 'includeMetaData']);
         }
@@ -41,6 +44,7 @@ class NewRelicLogger
         $record['hostname'] = gethostname();
         $record['environment'] = config('app.env');
         $record['service'] = config('newrelic.app_name', 'Laravel');
+        $record['channel'] = $this->channel;
 
         $this->collectException($record);
         $this->collectExtraData($record);
@@ -114,7 +118,7 @@ class NewRelicLogger
         }, $args);
     }
 
-    private function collectUserData(Authenticatable $user)
+    private function collectUserData(Authenticatable $user): array
     {
         return [
             'id' => $user->id ?? null,
