@@ -128,12 +128,12 @@ class NewRelicLogger
 
     private function collectExtraData(array &$record): void
     {
-        if (config('newrelic.extra_data') && is_callable(config('newrelic.extra_data'))) {
+        /*if (config('newrelic.extra_data') && is_callable(config('newrelic.extra_data'))) {
             $extraData = config('newrelic.extra_data')($this->request, $this->throwable);
             if (is_array($extraData) && count($extraData) > 0) {
                 $record['extra'] = $extraData;
             }
-        }
+        }*/
     }
 
     private function collectException(array &$record): void
