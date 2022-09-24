@@ -75,7 +75,7 @@ class NewRelicLogger
             $systemData['controller'] = $routeAction['controller'];
         }
         if (isset($routeAction['middleware'])) {
-            $systemData['middleware'] = join(',', $routeAction['middleware']);
+            $systemData['middleware'] = is_array($routeAction['middleware']) ? join(',', $routeAction['middleware']) : $routeAction['middleware'];
         }
 
         return $systemData;
