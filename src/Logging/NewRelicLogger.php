@@ -43,7 +43,7 @@ class NewRelicLogger
     {
         $record['hostname'] = gethostname();
         $record['environment'] = config('app.env');
-        $record['service'] = config('newrelic.app_name', 'Laravel');
+        $record['service'] = config('newrelic.app_name', env('APP_NAME'));
         $record['channel'] = $this->channel;
 
         $this->collectException($record);
